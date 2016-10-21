@@ -4,8 +4,8 @@
 
 # Site
 title: Robin's blog
-subtitle: Keep Moving
-description:
+subtitle: 人淡如菊
+description: 醉卧塌上看风轻云淡，漫卷诗书听雨打芭蕉
 author: Robin
 language: zh-Hans
 timezone:
@@ -77,3 +77,24 @@ feed:
  type: atom
  path: atom.xml
  limit: 20
+
+# Social links
+# 设置侧边栏社交链接
+social:
+  Github: https://github.com/whtacm
+  Gmail: whtacm@gmail.com
+  Zhihu: http://www.zhihu.com/people/robinbird
+  # 等等
+
+# duoshuo comment,https://github.com/iissnan/hexo-theme-next/wiki/%E8%AE%BE%E7%BD%AE%E5%A4%9A%E8%AF%B4-DISQUS
+# 后来添加的多说评论功能，站点和主题都要添加
+duoshuo_shortname: whtacm
+
+# Swiftype站内搜索
+swiftype_key:
+
+# 设定站点建立时间
+since: 2016
+
+# 百度分析ID
+baidu_analytics: 76c47585fba401118a4898d6446a8fbf
