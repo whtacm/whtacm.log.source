@@ -69,8 +69,10 @@ theme: magiclamp
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/whtacm/whtacm.github.io.git
-#  repo: git@github.com:whtacm/whtacm.github.io.git
+  message: "update"
+  repo:
+    github: https://github.com/whtacm/whtacm.github.io.git
+    gitcafe: https://git.coding.net/whtacm/whtacm.git
 
 # feed setting:
 feed:
