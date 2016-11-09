@@ -72,7 +72,7 @@ deploy:
   message: "update"
   repo:
     github: https://github.com/whtacm/whtacm.github.io.git
-    gitcafe: https://git.coding.net/whtacm/whtacm.git
+    coding: https://git.coding.net/whtacm/whtacm.git
 
 # feed setting:
 feed:
@@ -99,4 +99,6 @@ swiftype_key:
 since: 2016
 
 # 百度分析ID
-baidu_analytics: 76c47585fba401118a4898d6446a8fbf
+# whtacm.github.io: 76c47585fba401118a4898d6446a8fbf
+# whtacm.cc: 97551011862ccb1d84eef0bd7737cfc3
+baidu_analytics: 97551011862ccb1d84eef0bd7737cfc3
