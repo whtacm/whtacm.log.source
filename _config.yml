@@ -29,11 +29,11 @@ skip_render:
   - README.md
   # whtacm.cc
   - baidu_verify_2gvPil4Jgl.html
+  - CNAME
 
 # Writing
 new_post_name: :title-:year-:month-:day.md # File name of new posts
 default_layout: post
-auto_spacing: false
 titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
 filename_case: 0
@@ -76,6 +76,7 @@ deploy:
   message: "update"
   repo:
     github: https://github.com/whtacm/whtacm.github.io.git
+    gitcafe: https://git.coding.net/whtacm/whtacm.git
     coding: https://git.coding.net/whtacm/whtacm.git,coding-pages
 
 # feed setting:
