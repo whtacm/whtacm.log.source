@@ -12,7 +12,7 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://whtacm.cc
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -26,10 +26,12 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
+  - README.md
 
 # Writing
 new_post_name: :title-:year-:month-:day.md # File name of new posts
 default_layout: post
+auto_spacing: true
 titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
 filename_case: 0
@@ -40,7 +42,7 @@ future: true
 highlight:
   enable: true
   line_number: true
-  auto_detect: false
+  auto_detect: true
   tab_replace:
 
 # Category & Tag
@@ -98,7 +100,14 @@ swiftype_key:
 # 设定站点建立时间
 since: 2016
 
+# 编辑 站点配置文件， 新增字段 baidu_analytics 字段，值设置成你的百度统计脚本 id
 # 百度分析ID
 # whtacm.github.io: 76c47585fba401118a4898d6446a8fbf
 # whtacm.cc: 97551011862ccb1d84eef0bd7737cfc3
 baidu_analytics: 97551011862ccb1d84eef0bd7737cfc3
+
+# 自动生成sitemap
+sitemap:
+path: sitemap.xml
+#baidusitemap:
+baidu: baidusitemap.xml
