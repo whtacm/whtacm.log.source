@@ -10,7 +10,7 @@ categories:
 - Android dev
 - 
 ---
-*<p align=""> ![](http://static.oschina.net/uploads/space/2015/0627/083244_BPCe_2306979.png) </p>*
+*<p align=""> ![](http://ofdub8np7.bkt.clouddn.com/2016/11/02/preface.png) </p>*
 > 前言
 
 之前，组内有一个 Android 项目，由于历史原因，一直是在 `Eclipse` 上开发的。最近，要对项目进行全面更新。首先，就是要把项目从 Eclipse 上移到 `Android Studio（下面都简称 AS）` 上来。这两天，我负责把项目进行转换的工作，该项目依赖的 *lib* 工程比较多，虽然之前下面也在用 `AS`，但是都是全过程的再用，从新建项目到调试发布，没有转过，过程中还是遇到了一些蛋疼琐碎的问题，然后就想把这些问题和解决方法放在一起。`如果能帮到你，荣幸之至`。
