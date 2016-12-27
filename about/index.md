@@ -28,6 +28,6 @@ date: 2016-10-20 22:43:32
 
 ----------
 
-- Github: github.com/whtacm
+- GitHub: github.com/whtacm
 - Zhihu: http://www.zhihu.com/people/robinbird
 - QQ: 364432355
