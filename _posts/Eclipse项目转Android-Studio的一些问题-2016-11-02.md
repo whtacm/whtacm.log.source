@@ -1,14 +1,18 @@
 ---
 title: Eclipse项目转Android Studio碰到的一些问题
 date: 2016-11-02 14:07:28
+
 tags:
 - Android Studio
 - Eclipse
 - Gradle
-- Android dev
+- Android
+
 categories:
-- Android dev
-- 
+- Android
+- Android Studio
+
+
 ---
 *<p align=""> ![](http://ofdub8np7.bkt.clouddn.com/2016/11/02/preface.png) </p>*
 > 前言

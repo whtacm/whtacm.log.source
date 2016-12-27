@@ -1,14 +1,17 @@
 ---
 title: PPMessage 使用踩坑：环境搭建篇
+date: 2016-12-26 10:19:07
+
 tags:
   - PPMessage
   - Python
   - Mac
   - Redis
+
 categories:
   - PPMessage
   - Python
-date: 2016-12-26 10:19:07
+
 ---
 
 

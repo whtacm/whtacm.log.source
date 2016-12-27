@@ -1,14 +1,17 @@
 ---
 title: Android 四大组件 Service 使用：进程间通信 、AIDL及Parcelable
+date: 2016-11-17 10:11:17
+
 tags:
   - Java
   - Service
   - AIDL
   - Parcelable
+
 categories:
   - Android
   - Component
-date: 2016-11-17 10:11:17
+
 ---
 > 前言
 

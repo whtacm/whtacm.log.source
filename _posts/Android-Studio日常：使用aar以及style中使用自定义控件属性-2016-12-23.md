@@ -1,14 +1,18 @@
 ---
 title: Android Studio日常：本地仓库引用方式使用 aar 以及 style 中使用自定义控件属性
 date: 2016-12-23 10:22:13
+
 tags:
 - Java
 - Android
+- Android Studio
 - aar
 - style
+
 categories:
 - Android
 - Android Studio
+
 ---
 
 > 前言 
