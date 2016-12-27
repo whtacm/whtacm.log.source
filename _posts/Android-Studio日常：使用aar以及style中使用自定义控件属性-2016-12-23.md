@@ -24,7 +24,7 @@ categories:
 <br>
 
 # 本地引用 aar
-昨天，项目里想找一个好一些的*RatingBar*控件，公司无法正常登陆 `github`，就在手机上查了几个库。都不太理想，不是依赖的包版本太高，一般的问题都是尺寸不能灵活的定义，定小了就会产生不良反应。最后找到了一款符合要求的库，不是图片替换方式的，尺寸能够随意设定。不过限制就是它是一个只支持多边形的 [*RatingBar*](https://github.com/Amagi82/FlexibleRatingBar)，另外就是不同于其他项目，没法通过一般引用第三方库的方式使用，类似 `build.gradle` 中这样写：
+昨天，项目里想找一个好一些的*RatingBar*控件，公司无法正常登陆 `GitHub`，就在手机上查了几个库。都不太理想，不是依赖的包版本太高，一般的问题都是尺寸不能灵活的定义，定小了就会产生不良反应。最后找到了一款符合要求的库，不是图片替换方式的，尺寸能够随意设定。不过限制就是它是一个只支持多边形的 [*RatingBar*](https://github.com/Amagi82/FlexibleRatingBar)，另外就是不同于其他项目，没法通过一般引用第三方库的方式使用，类似 `build.gradle` 中这样写：
 
 ```
 compile 'io.reactivex:rxjava:1.1.0'
@@ -36,7 +36,7 @@ compile 'io.reactivex:rxjava:1.1.0'
 (currently getting this set up with maven/jcenter. will update when available)
 ```
 
-o(╯□╰)o ，不过所幸的是library代码可以下下来，然后把它打成了 `aar` 文件放在主工程 `module` 里来用了。本来以为和 `jar` 文件一样的使用方式就行了，放到 `libs` 目录下面，然后 `build.gradle` 中这样写：
+o(╯□╰)o ，不过所幸的是library代码可以下下来，然后把它打成了 `aar` 文件放在主工程 `Module` 里来用了。本来以为和 `jar` 文件一样的使用方式就行了，放到 `libs` 目录下面，然后 `build.gradle` 中这样写：
 
 ```
 dependencies {
@@ -170,4 +170,4 @@ OK，完美应用。。。。
 </resources>
 ```
 
-运行，通过 :-D，其中 `com.demo.app` 为主工程 `module` 即应用的包名
+运行，通过 :-D，其中 `com.demo.app` 为主工程 `Module` 即应用的包名
