@@ -21,7 +21,7 @@ categories:
 <!--- more --->
 
 <br/>
-# 下载项目
+# 1、下载项目
 
 <br/>
 
@@ -41,12 +41,12 @@ git clone https://github.com/PPMESSAGE/ppmessage.git
 
 <br/>
 
-#  安装 Python && pip
+#  2、安装 Python && pip
 <br/>
 之后如果你按照官方的操作，*cd ppmessage* 到项目的目录下，执行 `bash` 的话，十有八九就会跪掉。。。因为项目需要的各种东西都需要你一步步来下载部署，不要看项目主页上就那么两三行命令，到后面你就知道了喝两三杯咖啡不一定能搞定。首先如果是 *Mac* 系统的话，我的是 `OS X EI Capitan 10.11`,装有 `Python` （版本2.7.10），但是并没有安装 `pip`，需要先按照这个，否则的话，你一上来就会报错的。
 
 <br/>
-## 替换镜像 
+## 2.1、替换镜像 
 
 <br/>
 在安装 `pip` 之前，我们要把镜像改为国内的，我相信现在很多的开发，无论你是 `Android` 还是 `Python` 的，基本上都要配置一把国内的镜像（原因你懂）。百度一下有很多文章，我用的是 `豆瓣` 的镜像。根据你自己的系统情况，在下面的目录中添加文件路径和文件：
@@ -74,7 +74,7 @@ No matching distribution found for apns2
 ```
 
 <br/>
-## 安装 pip 
+## 2.2、安装 pip 
 
 <br/>
 
@@ -85,7 +85,7 @@ sudo easy_install pip
 ```
 <br/>
 
-# 安装依赖 
+# 3、安装依赖 
 
 <br/>
 OK，下面就来到这一步的操作了，执行：
@@ -204,7 +204,7 @@ echo "Finish install the PPMessage requirements successfully, have fun with PPMe
 
 <br/>
 
-# 运行 PPMessage
+# 4、运行 PPMessage
 <br/>
 
 进行到这里了，最后一步了，执行这个：
@@ -323,10 +323,10 @@ OK
 
 <br> 
 
-# 最后
+# 5、最后
 <br> 
 
-## 关于镜像
+## 5.1、关于镜像
 <br> 
 
 关于镜像这块，`豆瓣` 已有了支持  *`HTTPS`* 的：

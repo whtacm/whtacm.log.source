@@ -22,7 +22,7 @@ categories:
 <!-- more -->
 从 Eclipse 导出项目到导入 AS，我会用自己的示例来大概演示一下，后面会放上实际项目迁移过程中遇到的问题和解决方法。
 <br/>
-# Eclipse导出项目 #
+# 1、Eclipse导出项目 #
 <br/>
 - 在 `Eclipse` 中打开你的项目，然后 *File -> Export* 或者在右键菜单中找到 *Export* ，打开导出项目弹出框。如下图，选中 *Generate Gradle build files*，点击 *Next*。
 
@@ -41,7 +41,7 @@ categories:
 ![](http://ofdub8np7.bkt.clouddn.com/2016/11/02/steps-4.png)
 
 <br/>
-# 导入Android Studio #
+# 2、导入Android Studio #
 <br/>
 完成上面的步骤，在导入 `AS` 之前，我们来看一下都生成了什么东西，在工程目录外层生成了如下文件，见下图。 `build.gradle` 是属于 Project （项目）的文件，`gradle` 文件夹下面描述了所用的 Gradle 信息。
 
@@ -62,13 +62,13 @@ categories:
 *`Note： 这里强烈建议先参照问题列表里的第一个问题，先修改Gradle 和 Android Plugin 版本后（也就是修改上图中 1 和 2 两个文件），再导入，省去不少麻烦`*
 
 <br/>
-# 问题列表（Issue list） #
+# 3、问题列表（Issue list） #
 <br/>
 项目导入`Android Studio`后，一般总会问题多多，就本项目为例，大概有下面几个。。。。而且有的问题会反复出现，改到想哭。。。。
 
 `PS： 所有报错信息中的路径和名称类似的都用 {.....} 或者 ‘xxxx’ 代替，具体每个人的项目路径和名称都不一样，到时候涉及到这些的时候，还需要具体对待`
 <br/>
-## Gradle 和 Android Plugin 版本 ##
+## 3.1、Gradle 和 Android Plugin 版本 ##
 <br/>
 通过 Eclipse 导出的项目，因为 adt 的原因，默认的 *Gradle* 和 *Android Plugin* 版本都比较低，需要提升下版本。但是，因为伟大的`墙`的存在，可能会下载不下来（出现下图的情况，一直停留在building）。
 
@@ -112,7 +112,7 @@ buildscript {
 .......
 ```
 <br/>
-## 配置合适的 buildToolsVersion ##
+## 3.2、配置合适的 buildToolsVersion ##
 <br/>
 `Eclipse` 为项目中每个工程单独生成一个 `build.gradle` 文件，这个文件包括以下内容（里面加了一些注释信息）：
 ```
@@ -162,7 +162,7 @@ android {
 Error:java.lang.UnsupportedClassVersionError: com/android/dx/command/Main : Unsupported major.minor version 52.0
 ```
 <br/>
-## 找不到 Java 类 ##
+## 3.3、找不到 Java 类 ##
 <br/>
 下面的这个信息是因为某个 Module 中使用到了 `sun.misc.BASE64Encoder` 类，而在 Eclipse 的项目中，加入了 *JRE System Library*（其中的 rt.jar 包含 `sun.misc.BASE64Encoder` 类），在 AS 中也引用到了 `rt.jar`，但没有这这一块的代码。去网上找到需要的jar包（不建议直接使用安装的 jdk 目录下面的 rt.jar，因为实在是太大啦。居然有 60+M。。。）放到 Module 下的 libs 下 sync 下项目就行了。 
 ```
@@ -171,7 +171,7 @@ import sun.misc.BASE64Encoder;
                ^
 ```
 <br/>
-## AndroidManifest.xml 文件合并 ##
+## 3.4、AndroidManifest.xml 文件合并 ##
 <br/>
 ```
 {....}/AndroidManifest.xml:70:9-39 Error:
@@ -196,7 +196,7 @@ See http://g.co/androidstudio/manifest-merger for more information about the man
 
 后来，程序发现了一个问题，就是安装*apk* 后，出现了多个 App 图标，把除主工程之外的所有 lib 工程中的 AndroidManifest.xml 中的那些入口 Activity 都去掉。
 <br/>
-## .9 资源文件 ##
+## 3.5、.9 资源文件 ##
 <br/>
 ```
 :{....}:bundleDebugAAPT err(Facade for 304835512) : No Delegate set : lost message:ERROR: 9-patch image {....}/build/intermediates/bundles/debug/res/drawable-hdpi-v4/skin_common_btn_red_unpressed.9.png malformed.
@@ -206,7 +206,7 @@ AAPT err(Facade for 304835512) : No Delegate set : lost message:       Found at 
 ```
 这个问题比较蛋疼， Eclipse 转 AS 的时候报出了很多这种问题，主要原因是 *.9* 文件不符合 AS 的规范，但是在  Eclipse 可以使用（比如，有的*.9* 图片，拉伸部分，就是那道黑线没出来，可以在 AS 中打开该图片进行操作），但是大多数的时候都是没办法，只能找你们的 UI 重新画。。。这也是我遇到的问题里，唯一是单靠程序猿自己不一定能搞定的事情，当然有特长的除外啦。
 <br/>
-## PNG 资源文件 ##
+## 3.6、 PNG 资源文件 ##
 <br/>
 ```
 :{....}:mergeDebugAndroidTestResourcesAAPT err(Facade for 1698576962) : No Delegate set : lost message:libpng error: Not a PNG file
@@ -227,7 +227,7 @@ FAILURE: Build failed with an exception.
 ```
 这个问题比较简单，资源文件命名不合符 AS 的规范，改掉就OK了。。
 <br/>
-## 编译死机 ##
+## 3.7、编译死机 ##
 <br/>
 执行编译后，下面提示条停在 `Gradle Build Running` 就不动了，机器直接死机。。。。最后 *OOM* 了。。。基本上遇到的报错信息大概下面两种
 ```
@@ -246,13 +246,13 @@ AGPBI: {"kind":"error","text":"\tat com.android.dx.util.Bits.makeBitSet(Bits.jav
 ```
 主要是修改 AS 的参数进行优化，增大运行内存。在 *Users/{username}/.gradle/gradle.properties* 文件中添加：
 > org.gradle.daemon=true
-org.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8
-org.gradle.parallel=true
-org.gradle.configureondemand=true
+> org.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8
+> org.gradle.parallel=true
+> org.gradle.configureondemand=true
 
 第一个是开启守护进程，第二个是更改 jvm 的参数，第三个是开启并行任务，第四个是按需配置开关。关于优化的问题可以参考下面这个文章 [Android Studio 运行、编译卡死的解决办法](http://blog.csdn.net/cswhale/article/details/51028242)。
 <br/>
-## jar包冲突 ##
+## 3.8、jar包冲突 ##
 <br/>
 项目之前用的是 Eclipse，用到了一些 github 上的第三方库，不过是用引用 jar包的方式，转到 AS 的过程中，这些文件都放在各个 lib 工程下的*libs* 文件目录中去了，而每个 lib 工程的*build.gradle* 文件都有这么一句：
 ```
@@ -361,11 +361,11 @@ uploadArchives {
 
 最后，按照引用 v4 包的方式进行引用依赖就 OK 了~~
 <br/>
-## Note/Warning ##
+## 3.9、Note/Warning ##
 <br/>
 其他的是一些 *Note/Warning* ，主要是 *Permission* 重复的警告信息，手动修改或者忽略。。。
 <br/>
-# 其他 #
+# 4、其他 #
 <br/>
 另外，可能是我们项目中的问题了，因为原来的一些 App 中的模块，比如*消息*、*新闻* 等等的，都是单独的 lib 工程，转到 AS 中成了一个个 Module 了，这样的后果就是编译一次非常的慢，比在 Eclipse 中还慢，你敢想象吗。。。。。造成的原因是因为 Module 太多了，造成 gradle 的 task list 非常多，每一个都非常的耗时。你可以打开你的 *Gradle Projects* 看一下，下图是 *Phoenix* 的 task list 的一部分：
 
