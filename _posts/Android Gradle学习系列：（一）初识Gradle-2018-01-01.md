@@ -4,9 +4,7 @@ tags:
   - Android
   - Gradle
 categories:
-  - Android
   - Gradle
-  - Android Studio
 date: 2018-01-01 20:23:31
 ---
 

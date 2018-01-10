@@ -9,7 +9,6 @@ tags:
 - Android
 
 categories:
-- Android
 - Android Studio
 
 

@@ -11,7 +11,6 @@ tags:
 
 categories:
 - Android
-- Android Studio
 
 ---
 
