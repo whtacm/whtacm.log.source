@@ -94,7 +94,7 @@ dependencies {
 
 本篇介绍了 Gradle 的核心作用以及功能特性。Android 主要是靠 Gradle 以及附加的插件 Android Plugin 共同完成项目的构建工作的。
 
-下一篇，我们将介绍 Gradle 的一些相关概念及命令行工具 *（command-line）*。
+下一篇，我们将介绍 Gradle 的一些相关知识、命令行工具 *（command-line）*和 Gradle Wrapper。
 
 <br/>
 
