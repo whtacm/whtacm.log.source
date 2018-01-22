@@ -26,6 +26,8 @@ Gradle 是一个基于 JVM 的构建工具，功能类似于 Ant 或着 Maven �
 
 # 2、Gradle安装
 
+<br/>
+
 Gradle的安装，两种方式：
 
 - 使用包管理器进行安装
@@ -40,6 +42,8 @@ $ gradle -v
 
 # 3、Gradle的特性
 
+<br/>
+
 Gradle 拥有众多的特性，来帮助用户进行快速构建项目，例如在性能方面：
 - 增量构建*（Incremental Builds）*， 构建过的任务，当输入、输出或配置没有发生变化不会再次构建
 - 任务输出缓存*（Task Output Caching）*，任务构建后的输出会被缓存起来，以便复用
@@ -52,6 +56,8 @@ Gradle 拥有众多的特性，来帮助用户进行快速构建项目，例如�
 <br/>
 
 # 4、Android Plugin
+
+<br/>
 
 针对不同生态，例如JVM、Android、C++、Swift、Objective-C，都有其特定的特性，这些特性主要是由相应的插件来完成，比如 Android 的 Build Tool，我们都会在每个 Android 项目的根目录下的 **build.gradle** 中看到这样的配置：
 
@@ -89,6 +95,8 @@ dependencies {
 <br/>
 
 # 5、写在最后
+
+<br/>
 
 本篇介绍了 Gradle 的核心作用以及功能特性。Android 主要是靠 Gradle 以及附加的插件 Android Plugin 共同完成项目的构建工作的。
 
