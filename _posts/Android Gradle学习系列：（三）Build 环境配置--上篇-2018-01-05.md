@@ -181,30 +181,205 @@ org.gradle.daemon.performance.enable-monitoring = false
 # 2、按需配置
 <br/>
 
+一个 Gradle 项目可以由一个根项目和若干子项目组成。从构建的过程（生命周期）来看，有三个阶段：初始化、配置和执行。初始化阶段决定哪些项目参与构建，配置阶段进行项目对象的配置工作，最后是任务的执行阶段。
+
+按需配置模式仅会对参与构建任务的项目进行配置，以便能够降低配置阶段的开销。该模式今后会成为默认的模式开启，该特性不能保证每次构建都能正确运行。多项目构建应该进行解耦。在按需配置模式下，项目应该按如下要求配置：
+
+- 根项目必须进行配置，支持一些通用的配置（ *allprojects* 或者 *subprojects* 脚本块）
+- 执行构建的目录下的项目应该进行配置，但是仅在 Gradle 没有任何任务执行时。当项目按需配置时，默认任务会被正确执行
+- 支持标准的项目依赖且相关项目进行配置。如果项目 A 依赖项目 B，那么构建 A 会引起这两个项目的配置
+- 支持任务路径进行任务的依赖并引起相关项目的配置。例如： *someTask.dependsOn(":someOtherProject:someOtherTask")*
+- 在命令行中通过任务路径执行的任务会引起相关项目的配置。例如： 构建 *projectA:projectB:someTask* 会引起项目 projectB 的配置
+
+该特性可以通过配置启用，在下一篇中介绍。
+
+
+<br/>
+# 3、日志
+<br/>
+## 3.1、日志级别
+<br/>
+日志的重要性无需赘述。有六种日志级别，常见的有两种：*QUIET* 和 *LIFECYCLE*。
+日志级别见下面的表格：
+
+| 级别        | 用途   |
+| --------- | ---- |
+| ERROR     | 错误信息 |
+| QUIET     | 重要信息 |
+| WARNING   | 警告信息 |
+| LIFECYCLE | 进度信息 |
+| INFO      | 信息   |
+| DEBUG     | 调试信息 |
+
+<br/>
+你可以使用命令行选项来决定输出的日志级别：
+
+| 选项           | 输出日志级别             |
+| ------------ | ------------------ |
+| 无            | LIFECYCLE 及更高      |
+| -q 或 --quiet | QUIET 及更高          |
+| -w 或 --warn  | WARN 及更高           |
+| -i 或 --info  | INFO 及更高           |
+| -d 或 --debug | DEBUG 及更高 (全部日志信息) |
+
+<br/>
+Stacktrace 命令行选项：
+
+| 选项                     | 意义                  |
+| ---------------------- | ------------------- |
+| 无                      | 不会输出构建错误的栈信息，内部错误除外 |
+| -s 或 --stacktrace      | 简要的栈信息打印，推荐方式       |
+| -S 或 --full-stacktrace | 完整的栈信息打印            |
+
+<br/>
+## 3.2、打印日志信息
+<br/>
+简单的方式是使用标准输出，该日志级别为 *QUIET*。例如在 *build.gradle* 中：
+
+```
+println 'A message which is logged at QUIET level'
+```
+
+
+
+Gradle 在构建脚本中提供了 *logger* 属性，它是 *Logger* 的实例。例如在 *build.gradle* 中：
+
+```
+logger.quiet('An info log message which is always logged.')
+logger.error('An error log message.')
+logger.warn('A warning log message.')
+logger.lifecycle('A lifecycle info log message.')
+logger.info('An info log message.')
+logger.debug('A debug log message.')
+logger.trace('A trace log message.')
+```
+
+
+
+或者使用 *SLF4J* 来打印信息：
+
+```
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+
+Logger slf4jLogger = LoggerFactory.getLogger('some-logger')
+slf4jLogger.info('An info log message logged using SLF4j')
+```
 
 
 
 <br/>
-# 3、-\-max-workers
-<br/>
+
+## 3.3、外部工具/库的日志
 
 <br/>
-# 4、日志
-<br/>
 
-<br/>
-# 5、监控配置
-<br/>
+Gradle 内部使用 Ant 和 Ivy。因此有两套日志系统。然后把它们的日志输出定向到自己的日志系统来。当然，其他的工具也会有一些标准输出。默认情况，Gradle 会将标准输出定向到 *QUIET* 级别，标准错误定向到 *ERROR* 级别。 这些行为都是可配的。项目对象提供了 *LoggingManager* ，来帮助你把标准输出进行定向配置。
 
-<br/>
-# 6、缓存
-<br/>
+例如在 *build.gradle* 中配置标准输出捕获：
 
-<br/>
-# 7、构建输出
-<br/>
+```
+logging.captureStandardOutput LogLevel.INFO
+println 'A message which is logged at INFO level'
+```
 
 
+
+在任务执行阶段改变标准输出、错误的日志级别，任务也提供了  *LoggingManager* ：
+
+```
+task logInfo {
+    logging.captureStandardOutput LogLevel.INFO
+    doFirst {
+        println 'A task message which is logged at INFO level'
+    }
+}
+```
+
+
+
+Gradle 和很多 Java 日志工具库提供集成，例如 Jakarta、Log4j 。可以去参考下。
+
+<br/>
+
+## 3.4、改变日志内容
+
+<br/>
+
+这一部分主要是考虑到你可能有一些定制化的要求。比如日志格式、内容等等。你可以使用 [*Gradle.useLogger(java.lang.Object)*](https://docs.gradle.org/current/dsl/org.gradle.api.invocation.Gradle.html#org.gradle.api.invocation.Gradle:useLogger(java.lang.Object)) 方法进行日志输出的替换。这可以定义在构建脚本、初始脚本或者通过嵌入API。需要注意的时，它会禁用 Gradle 的默认输出。
+
+使用初始脚本改变任务执行和构建完成时的日志，在 *init.gradle* 中：
+
+```
+useLogger(new CustomEventLogger())
+
+class CustomEventLogger extends BuildAdapter implements TaskExecutionListener {
+
+    public void beforeExecute(Task task) {
+        println "[$task.name]"
+    }
+
+    public void afterExecute(Task task, TaskState state) {
+        println()
+    }
+    
+    public void buildFinished(BuildResult result) {
+        println 'build completed'
+        if (result.failure != null) {
+            result.failure.printStackTrace()
+        }
+    }
+}
+```
+
+
+
+使用 *-I* 选项指定初始脚本
+
+```
+> gradle -I init.gradle build
+[compile]
+compiling source
+
+[testCompile]
+compiling test source
+
+[test]
+running unit tests
+
+[build]
+
+build completed
+3 actionable tasks: 3 executed
+```
+
+
+
+自定义的 logger 可以执行以下几个监听器接口。
+
+- [`BuildListener`](https://docs.gradle.org/current/javadoc/org/gradle/BuildListener.html)
+- [`ProjectEvaluationListener`](https://docs.gradle.org/current/javadoc/org/gradle/api/ProjectEvaluationListener.html)
+- [`TaskExecutionGraphListener`](https://docs.gradle.org/current/javadoc/org/gradle/api/execution/TaskExecutionGraphListener.html)
+- [`TaskExecutionListener`](https://docs.gradle.org/current/javadoc/org/gradle/api/execution/TaskExecutionListener.html)
+- [`TaskActionListener`](https://docs.gradle.org/current/javadoc/org/gradle/api/execution/TaskActionListener.html)
+
+<br/>
+
+# 4、缓存
+<br/>
+
+缓存的好处，主要的考虑是加快数据的读取或者恢复任务。构建缓存也是一个缓存机制，重复使用构建的输出。缓存通常保存在本地或远程服务器，并且还要一定的检车机制，避免再次生成工作。
+
+任务输出缓存使用了 *up-to-date* 检测。
+
+默认情况，构建缓存是禁用的。两种方式可以开启缓存
+
+- 使用 *-\-build-cache* 命令行选项，但只对本次构建使用
+- 在 *gradle.properties* 文件中添加 *org.gradle.caching=true* 配置，每次都会有效，除非显式的使用 *-\-no-build-cache*
+
+构建缓存存放在 Gradle 用户 home 目录，该位置可配。
+
+<br/>
 
 
 

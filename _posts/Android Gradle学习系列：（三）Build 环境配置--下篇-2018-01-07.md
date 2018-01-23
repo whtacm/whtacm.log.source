@@ -53,7 +53,7 @@ Gradle提供了一系列的选项，让你能够更容易的对执行构建的 J
 
 >org.gradle.workers.max
 
-配置 Gradle 可以使用的最大 worker 数。
+配置 Gradle 可以使用的最大 worker 数，默认是处理器数 *（number of processors）*。
 
 >org.gradle.logging.level
 
@@ -175,14 +175,6 @@ systemProp.https.nonProxyHosts=*.nonproxyrepos.com|localhost
 
 
 <br/>
-# 4、Build 加速
-
-<br/>
-
-
-
-<br/>
-
 ------
 [1] Jenkins、Teamcity、Bamboo还有其他的 CI 系统提供此类功能
 
