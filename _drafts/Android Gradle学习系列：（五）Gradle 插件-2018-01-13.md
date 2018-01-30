@@ -1,5 +1,5 @@
 ---
-title: Android Gradle学习系列：（四）依赖管理-进阶篇
+title: Android Gradle学习系列：（五）Gradle 插件
 tags:
   - Android
   - Gradle
