@@ -202,19 +202,32 @@ apply plugin : 'org.example.greeting'
 
 多数插件需要从构建脚本中获取一些配置。其中一个方式就是使用 extension （扩展）对象。Gradle Project 有一个相关的 [`ExtensionContainer`](https://docs.gradle.org/current/javadoc/org/gradle/api/plugins/ExtensionContainer.html) 对象，它存放所有的配置及属性。你可以在其中添加扩展来为插件提供配置。一个扩展对象其实就是一个 Java Bean。
 
+配置可以提供一些丰富的属性，在 Android 开发中，这很常见：
 
+```
+android {
+	compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+    buildTypes {
+       productFlavors{
+			...
+    	}
+    }
+   
+}
+```
+
+Android Gradle Plugin 在 build 脚本中主要的就是这个 android 扩展配置。插件通过该扩展来进行构建任务的相关配置。
+
+这里，你可以参考：
+
+- 自定义插件编写（*官方*） [Writing Custom Plugins](https://docs.gradle.org/current/userguide/custom_plugins.html) ，该指南是基于 Groovy 语言编写的。
+- [Gradle插件开发](https://www.jianshu.com/p/3c59eded8155) ，该份文章你会对自定义插件开发有一个更好的概念上的了解，尤其是对 task 的渐进式构建方面，扩展的编写。
+- [A simple Gradle Plugin development example](https://github.com/whtacm/GradlePlugin) ，一个简单的插件编写示例，基于 Java 语言实现的。
 
 <br/>
 
-## 1.6、扩展属性与任务属性映射
-
-<br/>
-
-
-
-<br/>
-
-## 1.7、进一步阅读
+## 1.6、进一步阅读
 
 <br/>
 
@@ -224,3 +237,39 @@ apply plugin : 'org.example.greeting'
 - 插件测试 [Testing plugins](https://docs.gradle.org/4.5/userguide/test_kit.html)
 - 为新任务类型添加持续构建支持 [Adding incremental build support to new task types](https://docs.gradle.org/4.5/userguide/more_about_tasks.html#sec:up_to_date_checks)
 
+
+<br/>
+
+# 2、Android Gradle Plugin 介绍
+
+<br/>
+
+刚接触 Android Studio 的时候，一直不太了解 build.gradle 里的那些 DSL，诸如 *buildscript、allprojects、android* 太多的标签。当然，你可以通过这份官方文档来学习 [Android Plugin DSL Reference](http://google.github.io/android-gradle-dsl/current/index.html)  。后来，直到我看了 Android Gradle Plugin的代码之后我才对这些东西有了更清晰的认识。因此，为什么要了解 Android Gradle Plugin，其实是一个 ***知其所以然*** 的过程。
+
+<br/>
+
+## 2.1、从 Project 开始
+
+<br/>
+
+
+
+
+
+<br/>
+
+## 2.2、BasePlugin及其子类
+
+<br/>
+
+
+
+
+
+
+
+<br/>
+
+## 2.1、Base
+
+<br/>
