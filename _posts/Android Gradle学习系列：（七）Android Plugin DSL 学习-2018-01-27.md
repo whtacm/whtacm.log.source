@@ -1,5 +1,5 @@
 ---
-title: Android Gradle学习系列：（五）Gradle 插件开发及 Android Gradle 插件
+title: Android Gradle学习系列：（七）Android Plugin DSL 学习
 tags:
   - Android
   - Gradle

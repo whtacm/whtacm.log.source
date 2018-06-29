@@ -1,5 +1,5 @@
 ---
-title: Android Gradle学习系列：（五）Gradle DSL 学习
+title: Android Gradle学习系列：（六）Gradle DSL 学习
 tags:
   - Android
   - Gradle
